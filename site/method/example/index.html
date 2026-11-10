@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#f5f3ee">
     <title>Пример планирования — FinSprint</title>
     <link rel="stylesheet" href="../../styles.css">
+    <script src="../../calculator.js" defer></script>
   </head>
   <body>
     <main class="wrap article">
@@ -39,6 +40,33 @@
       <p>Допустим, после пересчёта доступно только 45&nbsp;000&nbsp;₽. План не уменьшит порции по 10&nbsp;000&nbsp;₽ молча и не предложит прожить на меньшую сумму. Он покажет недостачу к нужной дате. Человек сможет замедлить цель, перенести гибкий платёж или пересмотреть сам план.</p>
 
       <p class="note">Все суммы здесь условные. Даты доходов и состав статей меняют конкретную раскладку.</p>
+      <section class="calculator" id="calculator" aria-labelledby="calculator-title" hidden>
+        <p class="eyebrow">ПОПРОБУЙТЕ СВОИ ЧИСЛА</p>
+        <h2 id="calculator-title">Хватит ли дохода на спринт?</h2>
+        <p>Измените суммы и число недель. Здесь один доход и один платёж внутри спринта; даты поступлений и уже накопленные деньги не учитываются.</p>
+        <form id="sprint-form" novalidate>
+          <div class="calculator-fields">
+            <label>Доход, ₽<input name="income" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="60000" required></label>
+            <label>Число недель<input name="weeks" type="number" inputmode="numeric" min="1" max="52" step="1" value="4" required></label>
+            <label>На одну неделю, ₽<input name="weekly" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="10000" required></label>
+            <label>Платёж внутри спринта, ₽<input name="payment" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="8000" required></label>
+          </div>
+          <button type="reset">Вернуть числа примера</button>
+        </form>
+        <p class="calculator-error" id="calculator-error" role="status" hidden>Заполните все поля целыми числами: суммы от 0 до 1 000 000 000 ₽, число недель — от 1 до 52.</p>
+        <div id="calculator-result" aria-live="polite" aria-atomic="true">
+          <div class="income-node">Доход <strong id="income-result"></strong></div>
+          <p class="flow-caption">↓ Планируем полные суммы</p>
+          <dl class="allocation-flow">
+            <div><dt>01 · На недели</dt><dd id="weeks-result"></dd><small id="weeks-detail"></small></div>
+            <div><dt>02 · На платёж</dt><dd id="payment-result"></dd><small>Внутри этого спринта</small></div>
+            <div><dt>Всего нужно</dt><dd id="total-result"></dd><small>Недели + платёж</small></div>
+          </dl>
+          <div class="balance-result"><strong id="balance-result"></strong><p id="balance-detail"></p></div>
+        </div>
+        <p class="note calculator-note">Расчёт выполняется в вашем браузере. Введённые числа не отправляются на сервер.</p>
+      </section>
+
       <nav class="next-links" aria-label="Переходы между разделами"><a href="../practice/">←&nbsp;Как начать</a><a href="../../#sections">К оглавлению&nbsp;→</a></nav>
       <footer class="footer-nav"><a href="../../">Метод FinSprint</a><a href="../../support/">Поддержка</a><a href="../../privacy/">Приватность</a><span>© 2026 FinSprint</span></footer>
     </main>

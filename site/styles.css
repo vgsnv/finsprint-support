@@ -121,3 +121,31 @@ p { max-width: var(--reading-width); margin: 0 0 16px; color: var(--ink-soft); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
 }
+
+/* Interactive sprint example. */
+[hidden] { display: none !important; }
+.calculator { margin-top: 36px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); scroll-margin-top: 24px; }
+.calculator h2 { margin-top: 10px; }
+.calculator-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.calculator label { display: grid; gap: 6px; font-size: 14px; color: var(--ink-soft); }
+.calculator input { width: 100%; min-width: 0; padding: 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--page); color: var(--ink); font: inherit; font-size: 18px; font-variant-numeric: tabular-nums; }
+.calculator input[aria-invalid="true"] { border-color: #9c4632; }
+.calculator button { min-height: 44px; margin: 12px 0 20px; padding: 8px 0; border: 0; background: transparent; color: var(--accent); font: inherit; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.calculator :is(input, button):focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
+.income-node { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 16px; border-radius: 10px; background: var(--accent-strong); color: var(--surface); }
+.flow-caption { margin: 12px 0; color: var(--muted); font-size: 13px; text-align: center; max-width: none; }
+.allocation-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.allocation-flow > div { padding: 16px; border: 1px solid var(--line); border-radius: 10px; }
+.allocation-flow dt, .allocation-flow small { color: var(--muted); font-size: 12px; }
+.allocation-flow dd { margin: 6px 0; font-size: 19px; font-weight: 650; overflow-wrap: anywhere; }
+.balance-result { margin-top: 16px; padding: 18px; border-radius: 10px; background: var(--surface-muted); }
+.balance-result strong { font-size: 20px; }
+.balance-result p { margin: 8px 0 0; font-size: 14px; }
+[data-state="shortfall"] .balance-result { background: #f7e9e3; border-left: 3px solid #9c4632; }
+[data-state="shortfall"] .balance-result strong, .calculator-error { color: #813b29; }
+.calculator-note { margin: 16px 0 0; }
+@media (max-width: 560px) {
+  .calculator { padding: 18px; }
+  .calculator-fields, .allocation-flow { grid-template-columns: minmax(0, 1fr); }
+  .allocation-flow > div { padding: 12px 16px; }
+}
