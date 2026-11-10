@@ -2,8 +2,22 @@
 
 Публичные страницы поддержки, политики конфиденциальности и метода планирования денег «Известное будущее».
 
-- Метод: https://vgsnv.github.io/finsprint-support/method/
+- Метод: https://vgsnv.github.io/finsprint-support/
 - Политика конфиденциальности: https://vgsnv.github.io/finsprint-support/privacy/
 - Поддержка: https://vgsnv.github.io/finsprint-support/support/
 
 Исходники статических страниц находятся в `site/`; GitHub Pages публикует только эту папку.
+
+## Локальный запуск
+
+Из корня проекта:
+
+```bash
+python3 -m http.server 8000 --directory site
+```
+
+Откройте http://localhost:8000/. Относительные ссылки работают как локально,
+так и в подпапке GitHub Pages. Остановка сервера — `Ctrl+C`.
+
+Главная страница — обзор метода и оглавление. Разделы находятся в `site/method/`;
+старый адрес `/method/` перенаправляет на главную. Поддержка и приватность доступны из подвала.
