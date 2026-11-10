@@ -1,6 +1,9 @@
-# FinSprint support site
+# FinSprint
 
-Static support and privacy pages for the FinSprint app, published with GitHub Pages.
+Публичные страницы поддержки, политики конфиденциальности и метода планирования денег «Известное будущее».
 
-- Privacy policy: https://vgsnv.github.io/finsprint-support/privacy/
-- Support: https://vgsnv.github.io/finsprint-support/support/
+- Метод: https://vgsnv.github.io/finsprint-support/method/
+- Политика конфиденциальности: https://vgsnv.github.io/finsprint-support/privacy/
+- Поддержка: https://vgsnv.github.io/finsprint-support/support/
+
+Исходники статических страниц находятся в `site/`; GitHub Pages публикует только эту папку.
