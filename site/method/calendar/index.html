@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#f5f3ee">
     <title>Недели и спринты — FinSprint</title>
     <link rel="stylesheet" href="../../styles.css">
+    <script src="../../extra-week.js" defer></script>
   </head>
   <body>
     <main class="wrap article">
@@ -26,10 +27,47 @@
       <p>Спринт — несколько финнедель между соседними опорными датами. В личном календаре опорой служат даты регулярных доходов: ближайшая граница финнедели в этот день или после него начинает новый спринт.</p>
       <p>Когда доход приходит, человек распределяет его до начала нового спринта. К началу спринта недельные порции и подготовленные платежи уже учтены в плане.</p>
 
-      <h2>Откуда берётся дополнительная неделя</h2>
-      <p>Месяц длиннее четырёх недель, поэтому иногда между опорными датами помещается дополнительная финнеделя. Она не должна внезапно уменьшать недельную сумму. План заранее собирает для неё отдельную полную порцию из предыдущих доходов.</p>
+      <h2 id="extra-week">Почему иногда нужны деньги на пятую неделю</h2>
+      <p><strong>Четыре недели — это 28 дней.</strong> В месяце обычно 30 или 31 день. Если доход приходит раз в месяц, а деньги на жизнь выдаются раз в семь дней, эти два ритма не совпадают. Поэтому в одних спринтах четыре недельные порции, а в других — пять.</p>
+      <p>Считаем недели между началами спринтов: каждое начало — первая граница финнедели в день дохода или после него. Неделя, с которой начинается следующий спринт, относится уже к нему.</p>
 
-      <section class="callout"><p><strong>Пример.</strong> Если доход приходит один раз в месяц, спринт обычно содержит четыре финнедели, а иногда — пять. Пятая неделя получает такую же полную сумму, как остальные; её готовят заранее, когда план позволяет это сделать.</p></section>
+      <figure class="week-illustration">
+        <figcaption><strong>Пример: доход 1-го числа, финнеделя с понедельника</strong><span>Октябрь — декабрь 2026 года. Даты доходов в этом примере не переносятся с выходных.</span></figcaption>
+        <div class="sprint-strip"><strong>Предыдущий спринт · 4 недели</strong><p>Доход 1 октября → старт 5 октября → следующий старт 2 ноября.</p><div class="week-grid four"><span>5–11 окт.</span><span>12–18 окт.</span><span>19–25 окт.</span><span>26 окт. – 1 нояб.</span></div></div>
+        <div class="sprint-strip"><strong>Следующий спринт · 5 недель</strong><p>Доход 1 ноября → старт 2 ноября → следующий старт 7 декабря.</p><div class="week-grid"><span>2–8 нояб.</span><span>9–15 нояб.</span><span>16–22 нояб.</span><span>23–29 нояб.</span><span class="extra-week">30 нояб. – 6 дек.<small>Пятая порция</small></span></div></div>
+        <p class="note">Доход 1 декабря приходит внутри последней недели. Новый спринт начинается в понедельник 7 декабря, поэтому неделя 30 ноября — 6 декабря целиком остаётся в предыдущем.</p>
+      </figure>
+
+      <h2>Как подготовить пятую порцию</h2>
+      <p>При недельной сумме 10&nbsp;000&nbsp;₽ спринту из четырёх недель нужно 40&nbsp;000&nbsp;₽, а из пяти — 50&nbsp;000&nbsp;₽. Разница — ещё одна полная порция в 10&nbsp;000&nbsp;₽.</p>
+      <p>Её можно собрать заранее: например, отложить по 2&nbsp;500&nbsp;₽ с четырёх предыдущих доходов. К началу длинного спринта этот резерв уже готов. Недельная сумма остаётся прежней.</p>
+      <section class="callout"><p><strong>Резерв входит в общую сумму на недели.</strong> Если на пять недель нужно 50&nbsp;000&nbsp;₽ и 10&nbsp;000&nbsp;₽ уже отложены, из текущего дохода нужно добавить 40&nbsp;000&nbsp;₽. Если свободных денег для подготовки нет, план должен показать недостачу.</p></section>
+
+      <section class="calculator" id="week-calculator" aria-labelledby="week-calculator-title" hidden>
+        <p class="eyebrow">ВАШ КАЛЕНДАРЬ</p>
+        <h2 id="week-calculator-title">Сколько недель и сколько подготовить?</h2>
+        <p>Укажите две соседние даты дохода с учётом переносов. Расчёт найдёт начала спринтов по выбранному дню недели.</p>
+        <form id="week-form" novalidate>
+          <div class="calculator-fields">
+            <label>Дата дохода<input name="incomeDate" type="date" min="2000-01-01" max="2100-12-31" value="2026-11-01" required></label>
+            <label>Следующий доход<input name="nextDate" type="date" min="2000-01-01" max="2100-12-31" value="2026-12-01" required></label>
+            <label>Начало финнедели<select name="weekday"><option value="1">Понедельник</option><option value="2">Вторник</option><option value="3">Среда</option><option value="4">Четверг</option><option value="5">Пятница</option><option value="6">Суббота</option><option value="0">Воскресенье</option></select></label>
+            <label>Недельная сумма, ₽<input name="weekly" type="number" min="0" max="1000000000" step="1" value="10000" required inputmode="numeric"></label>
+            <label>Уже отложено на этот спринт, ₽<input name="saved" type="number" min="0" max="1000000000" step="1" value="0" required inputmode="numeric"></label>
+            <label>Сколько доходов до него для подготовки<input name="contributions" type="number" min="0" max="100" step="1" value="4" required inputmode="numeric"></label>
+          </div>
+          <p class="note">Для подготовки считайте только доходы раньше указанной даты. Калькулятор делит взнос поровну и не проверяет, хватает ли свободных денег после других трат.</p>
+          <button type="reset">Вернуть пример с пятой неделей</button>
+        </form>
+        <p id="week-error" class="calculator-error" role="status" hidden></p>
+        <div id="week-result" aria-live="polite" aria-atomic="true">
+          <div class="income-node"><span id="week-period"></span><strong id="week-count"></strong></div>
+          <ol class="week-grid calculated-weeks" id="week-timeline" aria-label="Недели спринта"></ol>
+          <dl class="allocation-flow"><div><dt>Всего на недели</dt><dd id="week-total"></dd></div><div><dt>Сверх четырёх недель</dt><dd id="week-extra"></dd></div><div><dt>Добавить с учётом резерва</dt><dd id="week-remaining"></dd></div></dl>
+          <div class="balance-result"><strong id="week-saving"></strong><p id="week-saving-detail"></p></div>
+        </div>
+        <p class="note calculator-note">Это расчёт недельных порций без платежей, целей и фондов. Он выполняется в браузере; введённые данные не отправляются на сервер.</p>
+      </section>
 
       <h2>Календарь в текущем приложении</h2>
       <p>FinSprint сейчас строит личный календарь от дат доходов и позволяет выбрать правило переноса дохода, если дата выпадает на выходной. Общий календарь с одинаковой лентой для всех в текущую версию приложения не входит.</p>
